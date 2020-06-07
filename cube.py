@@ -3,7 +3,6 @@ import pygame
 pygame.init()
 W, H = 900, 900
 window = pygame.display.set_mode((W, H))
-dot_mode = False
 
 
 class Cube:
@@ -14,11 +13,6 @@ class Cube:
 
     def line(self, joint):
         pygame.draw.line(window, (255, 255, 255), (self.x, self.y), (joint.x, joint.y), 5)
-
-    def draw(self):
-        dot = pygame.Surface((10, 10))
-        dot.fill((255, 255, 255))
-        window.blit(dot, (self.x, self.y))
 
 
 points = [
@@ -62,14 +56,9 @@ while run:
         else:
             points[point].x += mpos[0] - W // 2
             points[point].y += mpos[1] - H // 2
-
-    if dot_mode:
-        for point in points:
-            point.draw()
-    else:
-        for group in range(len(links)):
-            for connection in range(3):
-                links[group][0].line(links[group][connection + 1])
+    for group in range(len(links)):
+        for connection in range(3):
+            links[group][0].line(links[group][connection + 1])
 
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
@@ -77,6 +66,4 @@ while run:
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_ESCAPE:
                 run = False
-            if event.key == pygame.K_p:
-                dot_mode = not dot_mode
 pygame.quit()
