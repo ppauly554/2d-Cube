@@ -11,7 +11,6 @@ while run:
     for group in range(len(links)):
         for connection in range(3):links[group][0].line(links[group][connection + 1])
     for event in pygame.event.get():
-        if event.type == pygame.QUIT:run = False
+        if event.type == pygame.QUIT:run = False; pygame.quit()
         if event.type == pygame.KEYDOWN:
-            if event.key == pygame.K_ESCAPE:run = False
-pygame.quit()
+            if event.key == pygame.K_ESCAPE:run = False;pygame.quit()
